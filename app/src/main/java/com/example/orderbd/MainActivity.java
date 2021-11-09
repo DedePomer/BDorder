@@ -3,6 +3,7 @@ package com.example.orderbd;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -21,13 +22,14 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     Button btnAdd, btnOrder;
+    Button Bmain, Bnemain;
     EditText etName, etPrice;
     TextView tvSumm;
 
     DBHelper dbHelper;
     SQLiteDatabase database;
     ContentValues contentValues;
-    int summ = 0;
+
 
 
     @Override
@@ -35,11 +37,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Bmain = findViewById(R.id.Main);
+        Bnemain = findViewById(R.id.NeMain);
+        Bmain.setOnClickListener(this);
+        Bnemain.setOnClickListener(this);
+
         btnAdd = (Button) findViewById(R.id.Add);
         btnAdd.setOnClickListener(this);
-
-        btnOrder = (Button) findViewById(R.id.Order);
-        btnOrder.setOnClickListener(this);
 
         tvSumm = (TextView) findViewById(R.id.Summ);
         etName = (EditText) findViewById(R.id.Name);
@@ -94,13 +98,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 btndelete.setId(cursor.getInt(idIndex));
                 dbOutputRow.addView(btndelete);
 
-                Button btnbasket = new Button(this);
-                btnbasket.setOnClickListener(this);
-                params.weight = 1.0f;
-                btnbasket.setLayoutParams(params);
-                btnbasket.setText("В КОРЗИНУ");
-                btnbasket.setId(cursor.getInt(idIndex));
-                dbOutputRow.addView(btnbasket);
+
 
                 dbOutput.addView(dbOutputRow);
             }
@@ -130,36 +128,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 etPrice.setText("");
                 break;
 
-            case R.id.Order:
-                Toast toast;
-                if(summ!=0)
-                {
-                    tvSumm.setText("");
-                    toast = Toast.makeText(getApplicationContext(), "Сумма заказа: " + summ , Toast.LENGTH_LONG);
-                    toast.show();
-                    summ = 0;
-                }
-                else
-                {
-                    toast = Toast.makeText(getApplicationContext(), "Сумма не может быть равна 0", Toast.LENGTH_LONG);
-                    toast.show();
-                }
+            case R.id.Main:
+                Toast toast = Toast.makeText(getApplicationContext(), "Страница таже", Toast.LENGTH_LONG);
+                toast.show();
+                break;
+
+            case R.id.NeMain:
+                Intent intent = new Intent(this, Order.class);
+                startActivity(intent);
                 break;
 
             default:
-                Button b = (Button) v;
-                if (b.getText().toString()=="В КОРЗИНУ")
-                {
-
-                    Cursor cursor = database.query(DBHelper.TABLE_CONTACTS, null, null, null, null, null, null);
-                    int idb = v.getId();
-                    cursor.moveToPosition(idb-1);
-                    int id = cursor.getColumnIndex(DBHelper.KEY_PRICE);
-                    summ += Integer.valueOf(cursor.getString(id));
-                    tvSumm.setText(String.valueOf(summ));
-                }
-                else
-                {
                 View outputDBRow = (View) v.getParent();
                 ViewGroup outputDB = (ViewGroup) outputDBRow.getParent();
                 outputDB.removeView(outputDBRow);
@@ -192,7 +171,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 else
                     Log.d("mLog","0 rows");
-                }
                 break;
         }
 

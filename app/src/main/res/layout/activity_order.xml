@@ -4,59 +4,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".Order">
 
-    <EditText
-        android:id="@+id/Name"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        app:layout_constraintBaseline_toTopOf="parent"
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:id="@+id/Summ"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/Price"
-        android:hint="Name"/>
+        app:layout_constraintBottom_toTopOf="@id/Border"
+        android:hint="Summ"
+        />
 
-    <EditText
-        android:id="@+id/Price"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        app:layout_constraintBaseline_toTopOf="@id/Name"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/TBbuttons"
-        android:hint="Price"/>
-
-
-
-
-    <LinearLayout
-        android:id="@+id/TBbuttons"
-        android:layout_width="match_parent"
+    <Button
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10px"
+        android:id="@+id/Border"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Price"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/Table">
+        app:layout_constraintTop_toBottomOf="@id/Summ"
+        android:text="Order"
+        />
 
-        <Button
-            android:id="@+id/Add"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:text="Add" />
-
-    </LinearLayout>
 
     <TableLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/TBpage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TBbuttons"
-        app:layout_constraintBottom_toTopOf="@+id/TBpage"
+        app:layout_constraintTop_toBottomOf="@+id/Border"
         android:id="@+id/Table">
 
 
@@ -84,8 +62,9 @@
         android:layout_marginTop="10px"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
->
+        app:layout_constraintTop_toBottomOf="@+id/Table">
 
         <Button
             android:id="@+id/Main"
