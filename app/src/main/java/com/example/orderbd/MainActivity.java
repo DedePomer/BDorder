@@ -31,11 +31,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ContentValues contentValues;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+
 
         Bmain = findViewById(R.id.Main);
         Bnemain = findViewById(R.id.NeMain);
@@ -135,6 +137,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.NeMain:
                 Intent intent = new Intent(this, Order.class);
+                intent.putExtra("thisUser",false);
                 startActivity(intent);
                 break;
 

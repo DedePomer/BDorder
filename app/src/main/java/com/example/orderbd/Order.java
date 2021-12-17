@@ -31,17 +31,33 @@ public class Order extends AppCompatActivity implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order);
 
+        Bundle arg = getIntent().getExtras();
+        boolean thisUser = arg.getBoolean("thisUser",false);
+
+
+
         TVsumm = findViewById(R.id.Summ);
         Bmain = findViewById(R.id.Main);
         Bnemain = findViewById(R.id.NeMain);
         Border = findViewById(R.id.Border);
 
-        Bmain.setOnClickListener(this);
-        Bnemain.setOnClickListener(this);
         Border.setOnClickListener(this);
 
         dbHelper = new DBHelper(this);
         database = dbHelper.getWritableDatabase();
+
+        if(thisUser)
+        {
+            Bnemain.setVisibility(View.INVISIBLE);
+            Bmain.setVisibility(View.INVISIBLE);
+        }
+        else
+        {
+            Bnemain.setOnClickListener(this);
+            Bmain.setOnClickListener(this);
+        }
+
+
         UpdateTable();
     }
 
